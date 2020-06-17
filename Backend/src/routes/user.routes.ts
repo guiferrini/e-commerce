@@ -1,26 +1,12 @@
 import { Router } from 'express';
-import { uuid } from 'uuidv4';
+import User from '../models/User';
 // import createUser from '../services/CreateUser';
 // import { parseISO } from 'date-fns'; // converte o formato string
 // (como é enviado pelo Insomnia) p formato date (object) do JS
 
 const usersRouter = Router();
 
-interface TypeUser {
-  name: string;
-  email: string;
-  password: string;
-  whatsapp: number;
-  date: Date;
-  street: string;
-  number: number;
-  complement: string;
-  uf: string;
-  city: string;
-  id: string;
-}
-
-const users: TypeUser[] = []; // ainda n tenho BD
+const users: User[] = []; // ainda n tenho BD
 
 usersRouter.post('/', (request, response) => {
   const {
@@ -37,8 +23,7 @@ usersRouter.post('/', (request, response) => {
     return response.status(400).json({ message: 'Email already registered.' });
   }
 
-  const user = {
-    id: uuid(),
+  const user = new User(
     name,
     email,
     password,
@@ -49,7 +34,7 @@ usersRouter.post('/', (request, response) => {
     complement,
     uf,
     city,
-  };
+  );
 
   users.push(user);
 
