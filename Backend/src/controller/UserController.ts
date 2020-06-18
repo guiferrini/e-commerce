@@ -7,6 +7,14 @@ import User from '../models/User';
 const users: User[] = []; // ainda n tenho BD
 
 class UsersController {
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    await knex('users').where('id', id).delete();
+
+    return response.status(200).send();
+  }
+
   async index(request: Request, response: Response) {
     const all = await knex('users').select('*');
 
