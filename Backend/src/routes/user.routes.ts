@@ -18,7 +18,7 @@ usersRouter.post('/', async (request, response) => {
 
   // const formatDate = parseISO(data); // esta voltando 'null'
 
-  // Validando 1 email por cadastro
+  // Validando 1 email por cadastro -
   const findUserInSameEmail = users.find((user) => user.email === email);
   if (findUserInSameEmail) {
     return response.status(400).json({ message: 'Email already registered.' });

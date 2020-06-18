@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
