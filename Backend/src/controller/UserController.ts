@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import knex from '../database/connection';
 import User from '../models/User';
 
 // const usersRouter = Router();
@@ -6,22 +7,22 @@ import User from '../models/User';
 const users: User[] = []; // ainda n tenho BD
 
 class UsersController {
-  private users: User[];
+  async index(request: Request, response: Response) {
+    const all = await knex('users').select('*');
 
-  constructor() {
-    this.users = [];
+    return response.json(all);
   }
 
   async create(request: Request, response: Response) {
     const {
-      city, complement, date,
-      email, name, number, password, street,
-      uf, whatsapp,
+      name, email, password, whatsapp,
+      date, street, number, complement,
+      uf, city,
     } = request.body;
 
     // const formatDate = parseISO(data); // esta voltando 'null'
 
-    // Validando 1 email por cadastro
+    // Validando 1 email por cadastro - NÃO ESTA FUNCIONANDO - VALIDAR! TRAVA TD...
     const findUserInSameEmail = users.find((user) => user.email === email);
     if (findUserInSameEmail) {
       return response.status(400).json({ message: 'Email already registered.' });
@@ -40,7 +41,8 @@ class UsersController {
       city,
     );
 
-    await this.users.push(user);
+    // users.push(user);
+    await knex('users').insert(user);
 
     return response.json(user);
   }
