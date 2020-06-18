@@ -7,6 +7,18 @@ import User from '../models/User';
 const users: User[] = []; // ainda n tenho BD
 
 class UsersController {
+  async update(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const { email, whatsapp } = request.body;
+
+    await knex('users')
+      .where({ id })
+      .update({ email, whatsapp })
+      .then((u) => response.status(u ? 200 : 404).json({ success: !!u }))
+      .catch((e) => response.status(500).json(e));
+  }
+
   async delete(request: Request, response: Response) {
     const { id } = request.params;
 
