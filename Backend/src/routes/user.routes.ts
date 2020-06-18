@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import User from '../models/User';
+import knex from '../database/connection';
 // import createUser from '../services/CreateUser';
 // import { parseISO } from 'date-fns'; // converte o formato string
 // (como é enviado pelo Insomnia) p formato date (object) do JS
@@ -8,7 +9,7 @@ const usersRouter = Router();
 
 const users: User[] = []; // ainda n tenho BD
 
-usersRouter.post('/', (request, response) => {
+usersRouter.post('/', async (request, response) => {
   const {
     name, email, password, whatsapp,
     date, street, number, complement,
@@ -36,7 +37,8 @@ usersRouter.post('/', (request, response) => {
     city,
   );
 
-  users.push(user);
+  // users.push(user);
+  await knex('users').insert(user);
 
   return response.json(user);
 });
