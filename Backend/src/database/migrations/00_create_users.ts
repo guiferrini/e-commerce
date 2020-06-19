@@ -13,8 +13,13 @@ export async function up(knex: Knex) {
     table.string('complement', 30).notNullable();
     table.string('uf', 2).notNullable();
     table.string('city', 20).notNullable();
+    table.dateTime('created_at').notNullable()
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+    table.dateTime('updated_at').notNullable()
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
   });
 }
+// add Created_at: Date and updated_at: Date
 
 export async function down(knex: Knex) {
   return knex.schema.dropTable('users');
