@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import knex from '../database/connection';
-import User from '../models/User';
+// import User from '../models/User';
 
 interface RequestLa {
   email: string;
@@ -33,7 +33,7 @@ class SessionController {
 
     // retorno
     const user = await knex('users').where('email', email);
-    const id = (findUserInSameEmail.map((busca) => String(busca.id)).toString());
+    const id = (user.map((busca) => String(busca.id)).toString());
     // const chave = findUserInSameEmail.map((busca) => String(busca.password));
 
     // token - 1° parametro infos q vou acessar depois no frontend,
@@ -44,7 +44,8 @@ class SessionController {
       expiresIn: '1d',
     });
     // no response não informa o password do usuario - validar!
-    delete user.password;
+    // const passwordd = (user.map((busca) => String(busca.id)).toString());
+    // delete user.passwordd;
 
     return response.json({ user, token });
   }
