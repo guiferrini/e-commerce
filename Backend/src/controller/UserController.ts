@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
+import { hash } from 'bcryptjs';
 import knex from '../database/connection';
 import User from '../models/User';
 
 // const usersRouter = Router();
 
-const users: User[] = []; // ainda n tenho BD
+// const users: User[] = []; // ainda n tenho BD
 
 class UsersController {
   async update(request: Request, response: Response) {
@@ -42,16 +43,20 @@ class UsersController {
 
     // const formatDate = parseISO(data); // esta voltando 'null'
 
-    // Validando 1 email por cadastro - NÃO ESTA FUNCIONANDO - VALIDAR! TRAVA TD...
-    const findUserInSameEmail = users.find((user) => user.email === email);
-    if (findUserInSameEmail) {
+    // Validação p um unico email por user.
+    const findUserInSameEmail = await knex('users').where('email', email);
+    const ja = findUserInSameEmail.map((busca) => busca.email);
+    if (ja.includes(email)) {
       return response.status(400).json({ message: 'Email already registered.' });
     }
+
+    // Criptografia da senha
+    const hashedPassword = await hash(password, 8);
 
     const user = new User(
       name,
       email,
-      password,
+      hashedPassword,
       whatsapp,
       date,
       street,
@@ -64,7 +69,12 @@ class UsersController {
     // users.push(user);
     await knex('users').insert(user);
 
+    // no response não informa o password do usuario
+    delete user.password;
+
     return response.json(user);
+    // } else {
+    //   response.status(400).json({ message: 'Email already registered.' });
   }
 }
 
