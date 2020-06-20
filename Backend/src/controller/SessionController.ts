@@ -1,6 +1,7 @@
 // Session = sessão de conexãp
 import { Request, Response } from 'express';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 import knex from '../database/connection';
 import User from '../models/User';
 
@@ -30,12 +31,22 @@ class SessionController {
       return response.status(400).json({ message: 'Incorrect email/password B.' });
     }
 
-    // retorno - check
-    const user: User = await knex('users').where('email', email);
+    // retorno
+    const user = await knex('users').where('email', email);
+    const id = (findUserInSameEmail.map((busca) => String(busca.id)).toString());
+    // const chave = findUserInSameEmail.map((busca) => String(busca.password));
 
+    // token - 1° parametro infos q vou acessar depois no frontend,
+    // 2° chave secreta - md5online hash
+    // 3° configurações do token
+    const token = sign({}, 'bec52fd2d8eebdd4659debc24823a295', {
+      subject: id,
+      expiresIn: '1d',
+    });
+    // no response não informa o password do usuario - validar!
     delete user.password;
 
-    return response.json(user);
+    return response.json({ user, token });
   }
 }
 
