@@ -1,3 +1,5 @@
+// Reagra de negocio...
+
 interface PropsUser {
   name: string;
   email: string;
@@ -12,6 +14,7 @@ interface PropsUser {
   id: string;
 }
 
+// desestruturando data = city, id, name, ....
 function createUser({
   city, id, complement, date, email, name, number, password, street, uf, whatsapp,
 }: PropsUser) {

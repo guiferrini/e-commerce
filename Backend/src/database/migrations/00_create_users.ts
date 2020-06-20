@@ -16,7 +16,7 @@ export async function up(knex: Knex) {
     table.dateTime('created_at').notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.dateTime('updated_at').notNullable()
-      .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP')); // Validar! com erro...
   });
 }
 // add Created_at: Date and updated_at: Date
