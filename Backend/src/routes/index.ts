@@ -10,12 +10,12 @@ const routes = express.Router();
 const userController = new UserController();
 const sessionController = new SessionController();
 
-routes.use(Authentication);
+// routes.use(Authentication);
 
 routes.post('/users', userController.create);
 routes.get('/users', userController.index);
-routes.delete('/users/:id', userController.delete);
-routes.put('/users/:id', userController.update);
+routes.delete('/users/:id', Authentication, userController.delete);
+routes.put('/users/:id', Authentication, userController.update);
 
 routes.post('/session', sessionController.create);
 

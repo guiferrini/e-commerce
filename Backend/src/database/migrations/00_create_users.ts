@@ -19,7 +19,6 @@ export async function up(knex: Knex) {
       .defaultTo(knex.raw('CURRENT_TIMESTAMP')); // Validar! com erro...
   });
 }
-// add Created_at: Date and updated_at: Date
 
 export async function down(knex: Knex) {
   return knex.schema.dropTable('users');

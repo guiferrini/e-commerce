@@ -8,5 +8,8 @@ module.exports = {
   migrations: {
     directory: path.resolve(__dirname, '..', 'Backend', 'src', 'database', 'migrations'),
   },
+  seeds: {
+    directory: path.resolve(__dirname, '..', 'Backend', 'src', 'database', 'seeds'),
+  },
   useNullAsDefault: true,
 };
