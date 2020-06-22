@@ -2,7 +2,7 @@ import Knex from 'knex';
 
 export async function up(knex: Knex) {
   return knex.schema.createTable('wine_grapes', (table) => {
-    table.uuid('id').primary();
+    table.increments('id').primary();
     table.integer('wine_id').notNullable().references('id').inTable('wines');
     table.integer('grapes_id').notNullable().references('id').inTable('grapes');
     table.dateTime('created_at').notNullable()

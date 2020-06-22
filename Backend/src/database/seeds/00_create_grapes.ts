@@ -1,6 +1,6 @@
 import Knex from 'knex';
 
-export default async function seed(knex: Knex) {
+export async function seed(knex: Knex) {
   await knex('grapes').insert([
     { name: 'Chardonnay' }, // branco
     { name: 'Sauvignon Blanc' }, // branco
