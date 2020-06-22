@@ -1,9 +1,16 @@
 import { Response, Request } from 'express';
 import knex from '../database/connection';
 import Wine from '../models/Wine';
-import Grapes from '../models/Grapes';
+// import Grapes from '../models/Grapes';
 
 class WinesController {
+  // list tds vinhos sem grape
+  async index(request: Request, response: Response) {
+    const all = await knex('wines').select('*');
+
+    return response.json(all);
+  }
+
   async create(request: Request, response: Response) {
     const {
       name, description, image, grapes,
@@ -12,11 +19,11 @@ class WinesController {
     // trx = transaction -> so roda se tds 'insert' derem certos
     const trx = await knex.transaction();
 
-    const wine = {
+    const wine = new Wine(
       name,
       description,
       image,
-    };
+    );
     const newWine = await trx('wines').insert(wine);
     const wine_id = newWine[0];
 
@@ -28,6 +35,8 @@ class WinesController {
         grapes_id,
         wine_id,
       }));
+
+    // ** Colocar grapes, dentro de um Array!
 
     await trx('wine_grapes').insert(wineGrapes);
 

@@ -27,5 +27,6 @@ routes.post('/session', sessionController.create);
 routes.get('/grapes', grapesController.index);
 
 routes.post('/wines', wineController.create);
+routes.get('/wines', wineController.index);
 
 export default routes;
