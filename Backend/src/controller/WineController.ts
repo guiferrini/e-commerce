@@ -4,7 +4,6 @@ import Wine from '../models/Wine';
 // import Grapes from '../models/Grapes';
 
 class WinesController {
-  // criar filtro por uva(igual items), update
   async update(request: Request, response: Response) {
     const { id } = request.params;
 
@@ -51,8 +50,8 @@ class WinesController {
     return response.status(204).send();
   }
 
+  // filtra por id wine - list tds wines com grapes
   async show(request: Request, response: Response) {
-    // N finalizado, falt as grapes por wine
     const { id } = request.params;
 
     const wine = await knex('wines').where('id', id).first('*');

@@ -24,11 +24,11 @@ routes.put('/users/:id', Authentication, userController.update);
 
 routes.post('/session', sessionController.create);
 
-routes.get('/grapes', grapesController.index);
+routes.get('/grapes', grapesController.index); // filtro por uva, mostra wines q tem a uva
 
 routes.post('/wines', wineController.create);
-routes.get('/wines', wineController.index);
-routes.get('/wines/:id', wineController.show);
+routes.get('/wines', wineController.index); // todos wines
+routes.get('/wines/:id', wineController.show); // filtra por id, mostra wines
 routes.delete('/wines/:id', wineController.delete);
 routes.put('/wines/:id', wineController.update);
 
