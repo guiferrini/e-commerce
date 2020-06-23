@@ -4,7 +4,7 @@ export async function up(knex: Knex) {
   return knex.schema.createTable('wine_grapes', (table) => {
     table.increments('id').primary();
     table.integer('wine_id').notNullable().references('id').inTable('wines');
-    table.integer('grapes_id').notNullable().references('id').inTable('grapes');
+    table.integer('grapes_id').references('id').inTable('grapes');
     table.dateTime('created_at').notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.dateTime('updated_at').notNullable()

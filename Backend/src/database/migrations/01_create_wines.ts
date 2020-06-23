@@ -2,7 +2,7 @@ import Knex from 'knex';
 
 export async function up(knex: Knex) {
   return knex.schema.createTable('wines', (table) => {
-    table.uuid('id').primary();
+    table.increments('id').primary();
     table.string('name', 70).notNullable();
     table.string('description').notNullable();
     table.string('image').notNullable();

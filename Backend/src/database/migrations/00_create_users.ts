@@ -13,10 +13,8 @@ export async function up(knex: Knex) {
     table.string('complement', 30).notNullable();
     table.string('uf', 2).notNullable();
     table.string('city', 20).notNullable();
-    table.dateTime('created_at').notNullable()
-      .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
-    table.dateTime('updated_at').notNullable()
-      .defaultTo(knex.raw('CURRENT_TIMESTAMP')); // Validar! com erro...
+    table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.timestamp('updated_at').defaultTo(knex.fn.now());
   });
 }
 

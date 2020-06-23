@@ -1,13 +1,13 @@
 // Entidade, Tabela de Grapes
-import { uuid } from 'uuidv4';
+// import { uuid } from 'uuidv4';
 
 class Wine {
-  id: string;
+  id: number;
 
   name: string;
 
-  constructor(name: string) {
-    this.id = uuid();
+  constructor(id: number, name: string) {
+    this.id = id;
     this.name = name;
   }
 }
