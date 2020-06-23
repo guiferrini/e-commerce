@@ -4,6 +4,21 @@ import Wine from '../models/Wine';
 // import Grapes from '../models/Grapes';
 
 class WinesController {
+  // criar filtro por uva, delete, update
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const wine = await knex('wines').where('id', id).first('*');
+
+    if (!wine) {
+      return response.status(400).json({ message: 'ERRO. ID wine not found' });
+    }
+
+    await knex('wines').where('id', id).delete();
+
+    return response.status(204).send();
+  }
+
   async show(request: Request, response: Response) {
     // N finalizado, falt as grapes por wine
     const { id } = request.params;

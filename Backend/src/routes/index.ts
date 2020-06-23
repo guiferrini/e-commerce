@@ -29,5 +29,6 @@ routes.get('/grapes', grapesController.index);
 routes.post('/wines', wineController.create);
 routes.get('/wines', wineController.index);
 routes.get('/wines/:id', wineController.show);
+routes.delete('/wines/:id', wineController.delete);
 
 export default routes;
