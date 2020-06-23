@@ -4,7 +4,39 @@ import Wine from '../models/Wine';
 // import Grapes from '../models/Grapes';
 
 class WinesController {
-  // criar filtro por uva, delete, update
+  // criar filtro por uva(igual items), update
+  async update(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const wine = await knex('wines').where('id', id).first('*');
+
+    // validando se ID WINE existe
+    if (!wine) {
+      return response.status(400).json({ message: 'ERRO. ID wine not found' });
+    }
+
+    // buscando dados p serem alterados
+    const { name, description, image } = request.body;
+
+    // Validando se foi solicidado alteração, se não mantem original
+    if (name === 'undefined') {
+      const name = await knex('wines').where('name');
+    }
+    if (description === 'undefined') {
+      const description = await knex('wines').where('description');
+    }
+    if (image === 'undefined') {
+      const image = await knex('wines').where('image');
+    }
+
+    // efetuando alteração
+    knex('wines')
+      .where({ id })
+      .update({ name, description, image })
+      .then((u) => response.status(u ? 200 : 404).json({ success: !!u }))
+      .catch((e) => response.status(500).json(e));
+  }
+
   async delete(request: Request, response: Response) {
     const { id } = request.params;
 
@@ -73,7 +105,7 @@ class WinesController {
         grapes_id, // uvas
         wine_id, // id da criação do wine, porem sequencial
       }));
-    console.log(wineGrapes); // output [{}, {}]
+
     const grapes_id_array = [];
     const objetoFinal = {};
     for (const i in wineGrapes) {
@@ -84,7 +116,7 @@ class WinesController {
       objetoFinal.grapes_id = grapes_id_array;
     }
 
-    await trx('wine_grapes').insert(wineGrapes);
+    await trx('wine_grapes').insert(wineGrapes); // output wineGrapes [{}, {}]
 
     await trx.commit();
 
