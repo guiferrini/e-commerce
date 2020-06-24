@@ -77,8 +77,9 @@ class WinesController {
 
   async create(request: Request, response: Response) {
     const {
-      id, name, description, image, grapes,
+      id, name, description, grapes,
     } = request.body;
+    const image = request.file.filename;
 
     // trx = transaction -> so roda se tds 'insert' derem certos
     const trx = await knex.transaction();
