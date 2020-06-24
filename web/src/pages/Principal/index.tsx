@@ -69,7 +69,32 @@ return (
       </main>
 
       <footer>
-        <h1>rodape</h1>
+        <hgroup>
+          <a href='https://www.instagram.com/guiferrini/?hl=pt-br' target='_blank'>
+            <span><FiInstagram /></span>
+            <strong>Instagram</strong>
+          </a>
+          <a href='https://www.linkedin.com/in/guilherme-ferrini-44678256/' target='_blank'>
+            <span><FiLinkedin /></span>
+            <strong>Linkedin</strong>
+          </a>
+        </hgroup>
+        <div>
+          <span>
+            <h1>contato@bf.com</h1>
+            <h1>Bodega Ferrini - Wine House</h1>
+          </span>
+        </div>
+        <hgroup>
+          <a href='https://github.com/guiferrini' target='_blank'>
+            <span><FiFacebook /></span>
+            <strong>Facebook</strong>
+          </a>
+          <a href='https://www.youtube.com/' target='_blank'>
+            <span><FiYoutube /></span>
+            <strong>Youtube</strong>
+          </a>
+        </hgroup>
       </footer>
     </Content>
   </Container>

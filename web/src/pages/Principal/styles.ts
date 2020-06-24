@@ -11,7 +11,53 @@ export const Content = styled.div`
   flex-direction: column;
   /* margin: 0 20px 15px 20px; */
   width: 100vw;
-  
+  footer{
+    background: blue;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    background: #8c313d;
+    color: #F0F0F5;
+    height: auto;
+    padding: 5px;
+    font-size: 15px;
+
+    hgroup {
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-between; */
+      text-decoration: none;
+      padding: 15px;
+      /* align-items: stretch */
+    }
+    
+    a {
+      text-decoration: none;
+      color: #F0F0F5;
+      display: flex;     
+    }
+
+    span {
+      margin-right: 5px;
+    }
+    
+    img {
+      padding: 10px;
+      width: 10%;
+    }
+    
+    div {
+      align-self: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+    }
+    span h1 {
+      margin-bottom: 5px;
+    }
+  }
+
   header{
     display: flex;
     text-align: center;
@@ -77,7 +123,6 @@ export const Content = styled.div`
         }
       }
 
-
       a {
         display: flex;
         justify-content: flex-start;
@@ -98,5 +143,9 @@ export const Content = styled.div`
       }
     }
 
+  footer {
+    background: black;
+
   }
+}
 `;
