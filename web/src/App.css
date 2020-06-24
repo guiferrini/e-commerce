@@ -6,13 +6,13 @@
 }
 
 body {
-  background: #8c313d;
-  color: white;
+  background: #F0F0F5;
+  color: black;
 }
 
 body, input, button, h1, h2, h3, h4, h5, h6 {
   font-family: Roboto, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 button {
