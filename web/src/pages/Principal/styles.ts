@@ -11,6 +11,23 @@ export const Content = styled.div`
   flex-direction: column;
   /* margin: 0 20px 15px 20px; */
   width: 100vw;
+
+  main h1{
+    display: flex;
+    justify-content: space-around;
+  }
+  section{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  main hgroup{
+    
+    display: flex;
+    justify-content: space-around;
+  }
+
   footer{
     background: blue;
     display: flex;
@@ -142,10 +159,5 @@ export const Content = styled.div`
         }
       }
     }
-
-  footer {
-    background: black;
-
-  }
 }
 `;

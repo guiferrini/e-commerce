@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import { Container, Content } from './styles';
 
 import logo from '../../assets/Logo_Bodega_Ferrini.png';
+import argentina from '../../assets/wine_of_Argentina.jpg';
+import prices from '../../assets/special_prices.jpg';
+import week from '../../assets/wine_of_week.jpg';
 
 const Principal: React.FC = () => {
 
 return (
   <Container>
-    <Content>
+    <Content> 
       <header>
         <hgroup>
           <a href='https://www.instagram.com/guiferrini/?hl=pt-br' target='_blank'>
@@ -49,23 +52,68 @@ return (
             placeholder="PASSWORD"
           />
           <button type="submit">
-            Entrar
+            Login
           </button>
           <Link to="/">
             <FiAlertCircle/>
-            <h2>Esqueci minha senha</h2>
+            <h2>Forgot my password</h2>
           </Link>
           <Link to="/">
             <FiAlertCircle/>
-            <h2>Cadastro</h2>
+            <h2>Register</h2>
           </Link>
-
-
         </div>
       </header>
 
       <main>
-        <h1>corpo</h1>
+        <h1>Wines of the Week - News - com foto</h1>
+        <section>
+          <div>
+            <img src="week" alt=""/>
+            <h1>Name</h1>
+            <h2>Description</h2>
+            <h2>Grapes</h2>
+            <h2>Price</h2>
+          </div>
+          <div>
+            <img src="week" alt=""/>
+            <h1>Name2</h1>
+            <h2>Description</h2>
+            <h2>Grapes</h2>
+            <h2>Price</h2>
+          </div>
+          <div>
+            <img src="week" alt=""/>
+            <h1>Name3</h1>
+            <h2>Description</h2>
+            <h2>Grapes</h2>
+            <h2>Price</h2>
+          </div>
+        </section>
+        <hgroup>
+        {/* busca cliente digita / filtro - com foto */}
+          <form>
+            <input 
+              type="text"
+              name="search"
+              id="search"
+              placeholder="SEARCH"
+            />
+            <button type="submit">
+              Search
+            </button>
+          </form>
+          <div>
+            <Link to="/">See More Wines</Link>
+          </div>
+          <div>
+            <label htmlFor="uf">Select one Grape</label>
+            <select name="uf" id="uf">
+              <option value="0">Grape</option>
+            </select>
+          </div>
+        </hgroup>
+        <div>output</div>
       </main>
 
       <footer>
@@ -81,7 +129,7 @@ return (
         </hgroup>
         <div>
           <span>
-            <h1>contato@bf.com</h1>
+            <h1>contact@bf.com</h1>
             <h1>Bodega Ferrini - Wine House</h1>
           </span>
         </div>
