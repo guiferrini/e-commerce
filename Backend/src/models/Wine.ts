@@ -6,14 +6,17 @@ class Wine {
 
   name: string;
 
+  value: number
+
   description: string;
 
   image: string;
 
-  constructor(id: number, name: string, description: string,
+  constructor(id: number, name: string, value: number, description: string,
     image: string) {
     this.id = id;
     this.name = name;
+    this.value = value;
     this.description = description;
     this.image = image;
   }

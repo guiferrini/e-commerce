@@ -15,23 +15,28 @@ class WinesController {
     }
 
     // buscando dados p serem alterados
-    const { name, description, image } = request.body;
+    const {
+      name, description, value, image,
+    } = request.body;
 
-    // Validando se foi solicidado alteração, se não mantem original
     if (name === 'undefined') {
       const name = await knex('wines').where('name');
+    }
+    if (value === 'undefined') {
+      const value = await knex('wines').where('value');
     }
     if (description === 'undefined') {
       const description = await knex('wines').where('description');
     }
-    if (image === 'undefined') {
-      const image = await knex('wines').where('image');
-    }
-
+    // if (image === 'undefined') {
+    //   const image = await knex('wines').where('image');
+    // }
     // efetuando alteração
     knex('wines')
       .where({ id })
-      .update({ name, description, image })
+      .update({
+        name, description, image, value,
+      })
       .then((u) => response.status(u ? 200 : 404).json({ success: !!u }))
       .catch((e) => response.status(500).json(e));
   }
@@ -77,7 +82,7 @@ class WinesController {
 
   async create(request: Request, response: Response) {
     const {
-      id, name, description, grapes,
+      id, name, description, grapes, value,
     } = request.body;
     const image = request.file.filename;
 
@@ -87,6 +92,7 @@ class WinesController {
     const wine = new Wine(
       id,
       name,
+      value,
       description,
       image,
     );

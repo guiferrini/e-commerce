@@ -6,6 +6,7 @@ export async function up(knex: Knex) {
     table.string('name', 70).notNullable();
     table.string('description').notNullable();
     table.string('image').notNullable();
+    table.decimal('value', 8, 2).notNullable();
     table.dateTime('created_at').notNullable()
       .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
     table.dateTime('updated_at').notNullable()
