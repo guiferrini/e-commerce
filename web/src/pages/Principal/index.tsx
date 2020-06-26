@@ -69,25 +69,40 @@ return (
         <h1>Wines of the Week - News - com foto</h1>
         <section>
           <div>
-            <img src="week" alt=""/>
-            <h1>Name</h1>
-            <h2>Description</h2>
-            <h2>Grapes</h2>
-            <h2>Price</h2>
+            <div>
+              <img src={week} alt=""/>
+            </div>
+            <hgroup>
+              <h1>Name</h1>
+              <h2>Description</h2>
+              <h2>Grapes</h2>
+              <h2>Price</h2>
+              <h2>Buy</h2>
+            </hgroup>
           </div>
           <div>
-            <img src="week" alt=""/>
-            <h1>Name2</h1>
-            <h2>Description</h2>
-            <h2>Grapes</h2>
-            <h2>Price</h2>
+            <div>
+              <img src={week} alt=""/>
+            </div>
+            <hgroup>
+              <h1>Name</h1>
+              <h2>Description</h2>
+              <h2>Grapes</h2>
+              <h2>Price</h2>
+              <h2>Buy</h2>
+            </hgroup>
           </div>
           <div>
-            <img src="week" alt=""/>
-            <h1>Name3</h1>
-            <h2>Description</h2>
-            <h2>Grapes</h2>
-            <h2>Price</h2>
+            <div>
+              <img src={week} alt=""/>
+            </div>
+            <hgroup>
+              <h1>Name</h1>
+              <h2>Description</h2>
+              <h2>Grapes</h2>
+              <h2>Price</h2>
+              <h2>Buy</h2>
+            </hgroup>
           </div>
         </section>
         <hgroup>
@@ -103,9 +118,7 @@ return (
               Search
             </button>
           </form>
-          <div>
-            <Link to="/">See More Wines</Link>
-          </div>
+          <Link to="/">See More Wines</Link>
           <div>
             <label htmlFor="uf">Select one Grape</label>
             <select name="uf" id="uf">

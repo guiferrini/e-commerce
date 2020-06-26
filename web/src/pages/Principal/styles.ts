@@ -15,6 +15,7 @@ export const Content = styled.div`
   main h1{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 10px;
   }
   section{
     display: flex;
@@ -22,11 +23,35 @@ export const Content = styled.div`
     margin-bottom: 30px;
   }
 
+  section div{
+    display: flex;
+  }
+
+  section div hgroup{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+  }
+
+  section div img {
+    width: 180px;
+    height: 180px;
+    background: black;
+  }
+
   main hgroup{
-    
     display: flex;
     justify-content: space-around;
   }
+
+  main hgroup form input {
+    margin-right: 5px;
+  }
+
+  main hgroup div label {
+    margin-right: 5px;
+  }
+
 
   footer{
     background: blue;
