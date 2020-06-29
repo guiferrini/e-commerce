@@ -3,14 +3,14 @@ import './App.css';
 
 import Routes from './routes/index';
 
-import AuthContext from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <>
-      <AuthContext.Provider value={{ name: 'gui' }}>
+      <AuthProvider>
         <Routes />
-      </AuthContext.Provider>
+      </AuthProvider>
     </>
   );
 }

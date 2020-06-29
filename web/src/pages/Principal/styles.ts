@@ -134,7 +134,7 @@ export const Content = styled.div`
       width: 30%;
     }
 
-    div {
+    form {
       display: flex;
       flex-direction: column;
       margin-right: 5px;
