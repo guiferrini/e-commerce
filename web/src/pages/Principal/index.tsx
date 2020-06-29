@@ -1,11 +1,13 @@
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useContext, useCallback, useRef } from 'react';
 import { 
   FiFacebook, FiInstagram, FiLinkedin, FiYoutube, 
   FiAlertCircle, FiFrown, FiMail, FiLock, FiSearch 
 } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core'; // tipagem c tds funções do useRef.current
 import * as Yup from 'yup';
+import validationError from '../../erros/validationErros';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -26,35 +28,37 @@ interface SingInFormData {
 }
 
 const Principal: React.FC = () => {
-
-  // const [inputEmail, setInputEmail] = useState('');
   const { singIn } = useContext(AuthContext);
 
-  // const handleSubmit = useCallback(async(data: SingInFormData) => {
+  const formRef = useRef<FormHandles>(null);
 
-  //   try {
-  //     const schema = Yup.object().shape({
-  //       email: Yup.string()
-  //         .required('Email required')
-  //         .email('Enter a valid email address'),
-  //       password: Yup.string().required('Password required')
-  //     });
+  const handleSubmit = useCallback(async(data: object) => {
+    try {
+      formRef.current?.setErrors({}); //zerando erros
+      
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('Email required')
+          .email('Enter a valid email address'),
+        password: Yup.string().required('minimum 6 digits'),
+      });
 
-  //     // const email = setInputEmail;
-  //     // console.log(email);
-  //     singIn({
-  //       email: data.email,
-  //       password: data.password,
-  //     });
-  //   } catch (err){
-  //     throw new err('ERRO');
-  //   }
-  // }, []);
+      await schema.validate(data, {
+        abortEarly: false,
+      });
 
-  function handleSubmit(data: object): void {
-    console.log(data)
-  }
+      // singIn({
+        //   email: data.email,
+        //   password: data.password,
+        // });
+    } catch (err) {
+      const errors = validationError(err)
 
+      formRef.current?.setErrors(errors)
+    }
+  }, []); 
+
+  //uma função dentro do componente -> usar 'useCallback'
   const handleSubmitSearch = useCallback(() => {}, []);
 
 return (
@@ -83,7 +87,7 @@ return (
           <img src={logo} alt="Bodega_Ferrini_Wine_House" />
           <h1>Bodega Ferrini - Wine House</h1>
         </figure>
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Input 
             icon={FiMail}
             type="text"

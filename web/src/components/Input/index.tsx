@@ -27,7 +27,13 @@ useEffect(() => {
   return (
     <Container>
       {Icon && <Icon size={16} />}
-      <input defaultValue={defaultValue} ref={inputRef} {...rest}/>
+      <input 
+        defaultValue={defaultValue} 
+        ref={inputRef} 
+        {...rest}
+      />
+
+      {error}
     </Container>
   );
 };
