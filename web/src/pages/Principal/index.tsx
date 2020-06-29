@@ -1,5 +1,5 @@
 import React, { useContext, useCallback, useState } from 'react';
-import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiAlertCircle } from 'react-icons/fi'
+import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiAlertCircle, FiFrown, FiMail, FiLock } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 // import { Form } from '@unform/web'; 
@@ -76,12 +76,14 @@ return (
         </figure>
         <form>
           <Input 
+            icon={FiMail}
             type="text"
             name="email"
             id="email"
             placeholder="EMAIL"
           />
           <Input 
+            icon={FiLock}
             type="text"
             name="password"
             id="password"
@@ -91,7 +93,7 @@ return (
             Login
           </Button>
           <Link to="/">
-            <FiAlertCircle/>
+            <FiFrown/>
             <h2>Forgot my password</h2>
           </Link>
           <Link to="/">

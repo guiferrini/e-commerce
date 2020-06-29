@@ -140,31 +140,6 @@ export const Content = styled.div`
       margin-right: 5px;
       padding: 15px;
 
-      input {
-        margin-bottom: 6px;
-        padding: 5px;
-        color: black;
-        border-radius: 8px;
-        text-align: center;
-        height: 30px;
-        width: auto;
-      }
-
-      button {
-        margin-bottom: 6px;
-        border-radius: 8px;
-        padding: 5px;
-        height: 30px;
-        width: auto;
-        transition: background-color 0.2s;
-        
-        &:hover {
-          background: #8c313d;
-          color: #F0F0F5;
-          font-weight: bold;
-        }
-      }
-
       a {
         display: flex;
         justify-content: flex-start;
