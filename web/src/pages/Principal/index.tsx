@@ -6,6 +6,9 @@ import * as Yup from 'yup';
 
 import { AuthContext } from '../../context/AuthContext';
 
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+
 import { Container, Content } from './styles';
 
 import logo from '../../assets/Logo_Bodega_Ferrini.png';
@@ -21,7 +24,7 @@ interface SingInFormData {
 
 const Principal: React.FC = () => {
 
-  const [inputEmail, setInputEmail] = useState('');
+  // const [inputEmail, setInputEmail] = useState('');
   const { singIn } = useContext(AuthContext);
 
   const handleSubmit = useCallback(async(data: SingInFormData) => {
@@ -46,7 +49,7 @@ const Principal: React.FC = () => {
   }, []);
 
 return (
-  <Container>
+  <Container> 
     <Content> 
       <header>
         <hgroup>
@@ -71,23 +74,22 @@ return (
           <img src={logo} alt="Bodega_Ferrini_Wine_House" />
           <h1>Bodega Ferrini - Wine House</h1>
         </figure>
-        <form onSubmit={handleSubmit}>
-          <input 
-            
+        <form>
+          <Input 
             type="text"
             name="email"
             id="email"
             placeholder="EMAIL"
           />
-          <input 
+          <Input 
             type="text"
             name="password"
             id="password"
             placeholder="PASSWORD"
           />
-          <button type="submit">
+          <Button type="submit">
             Login
-          </button>
+          </Button>
           <Link to="/">
             <FiAlertCircle/>
             <h2>Forgot my password</h2>
