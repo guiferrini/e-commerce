@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiAlertCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
+
+import AuthContext from '../../context/AuthContext';
 
 import { Container, Content } from './styles';
 
@@ -10,6 +12,10 @@ import prices from '../../assets/special_prices.jpg';
 import week from '../../assets/wine_of_week.jpg';
 
 const Principal: React.FC = () => {
+
+const { name } = useContext(AuthContext);
+
+console.log(name);
 
 return (
   <Container>

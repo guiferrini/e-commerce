@@ -3,9 +3,15 @@ import './App.css';
 
 import Routes from './routes/index';
 
+import AuthContext from './context/AuthContext';
+
 function App() {
   return (
-    <Routes />
+    <>
+      <AuthContext.Provider value={{ name: 'gui' }}>
+        <Routes />
+      </AuthContext.Provider>
+    </>
   );
 }
 
