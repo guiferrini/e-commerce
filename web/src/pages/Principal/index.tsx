@@ -1,8 +1,11 @@
 import React, { useContext, useCallback, useState } from 'react';
-import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiAlertCircle, FiFrown, FiMail, FiLock } from 'react-icons/fi'
+import { 
+  FiFacebook, FiInstagram, FiLinkedin, FiYoutube, 
+  FiAlertCircle, FiFrown, FiMail, FiLock, FiSearch 
+} from 'react-icons/fi'
 import { Link } from 'react-router-dom';
+import { Form } from '@unform/web';
 import * as Yup from 'yup';
-// import { Form } from '@unform/web'; 
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -27,26 +30,32 @@ const Principal: React.FC = () => {
   // const [inputEmail, setInputEmail] = useState('');
   const { singIn } = useContext(AuthContext);
 
-  const handleSubmit = useCallback(async(data: SingInFormData) => {
+  // const handleSubmit = useCallback(async(data: SingInFormData) => {
 
-    try {
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('Email required')
-          .email('Enter a valid email address'),
-        password: Yup.string().required('Password required')
-      });
+  //   try {
+  //     const schema = Yup.object().shape({
+  //       email: Yup.string()
+  //         .required('Email required')
+  //         .email('Enter a valid email address'),
+  //       password: Yup.string().required('Password required')
+  //     });
 
-      // const email = setInputEmail;
-      // console.log(email);
-      singIn({
-        email: data.email,
-        password: data.password,
-      });
-    } catch (err){
-      throw new err('ERRO');
-    }
-  }, []);
+  //     // const email = setInputEmail;
+  //     // console.log(email);
+  //     singIn({
+  //       email: data.email,
+  //       password: data.password,
+  //     });
+  //   } catch (err){
+  //     throw new err('ERRO');
+  //   }
+  // }, []);
+
+  function handleSubmit(data: object): void {
+    console.log(data)
+  }
+
+  const handleSubmitSearch = useCallback(() => {}, []);
 
 return (
   <Container> 
@@ -74,7 +83,7 @@ return (
           <img src={logo} alt="Bodega_Ferrini_Wine_House" />
           <h1>Bodega Ferrini - Wine House</h1>
         </figure>
-        <form>
+        <Form onSubmit={handleSubmit}>
           <Input 
             icon={FiMail}
             type="text"
@@ -100,7 +109,7 @@ return (
             <FiAlertCircle/>
             <h2>Register</h2>
           </Link>
-        </form>
+        </Form>
       </header>
 
       <main>
@@ -145,17 +154,19 @@ return (
         </section>
         <hgroup>
         {/* busca cliente digita / filtro - com foto */}
-          <form>
-            <input 
+        {/* <Form initialData={{ search: 'Malbec'}}> */}
+          <Form onSubmit={handleSubmitSearch}>
+            <Input 
+              icon={FiSearch}
               type="text"
               name="search"
               id="search"
               placeholder="SEARCH"
             />
-            <button type="submit">
+            <Button type="submit">
               Search
-            </button>
-          </form>
+            </Button>
+          </Form>
           <Link to="/">See More Wines</Link>
           <div>
             <label htmlFor="uf">Select one Grape</label>
