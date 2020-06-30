@@ -4,7 +4,7 @@ import {
   FiAlertCircle, FiFrown, FiMail, FiKey, FiSearch,
   FiShoppingCart,  
 } from 'react-icons/fi'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core'; // tipagem c tds funções do useRef.current
 import * as Yup from 'yup';
@@ -30,6 +30,7 @@ interface SingInFormData {
 
 const Principal: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const history = useHistory();
 
   const { user, singIn } = useContext(AuthContext);
   console.log(user);   
@@ -53,11 +54,15 @@ const Principal: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+        
+        history.push('/UserPage');
+
     } catch (err) {
       const errors = validationError(err)
 
       formRef.current?.setErrors(errors)
     }
+
   }, [singIn]); 
 
   //uma função dentro do componente -> usar 'useCallback'
@@ -130,7 +135,7 @@ return (
               <h2>Description</h2>
               <h2>Grapes</h2>
               <h2>Price</h2>
-              <h2>Buy</h2>
+              <h2>To Buy make Login</h2>
             </hgroup>
           </div>
           <div>
@@ -142,7 +147,7 @@ return (
               <h2>Description</h2>
               <h2>Grapes</h2>
               <h2>Price</h2>
-              <h2>Buy</h2>
+              <h2>To Buy make Login</h2>
             </hgroup>
           </div>
           <div>
@@ -154,7 +159,7 @@ return (
               <h2>Description</h2>
               <h2>Grapes</h2>
               <h2>Price</h2>
-              <h2>Buy</h2>
+              <h2>To Buy make Login</h2>
             </hgroup>
           </div>
         </section>
