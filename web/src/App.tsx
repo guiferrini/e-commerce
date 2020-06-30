@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './routes/index';
 
@@ -9,7 +10,9 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <Routes />
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </AuthProvider>
     </>
   );

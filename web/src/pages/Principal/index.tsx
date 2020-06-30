@@ -111,7 +111,7 @@ return (
             <FiFrown/>
             <h2>Forgot my password</h2>
           </Link>
-          <Link to="/">
+          <Link to="/users">
             <FiAlertCircle/>
             <h2>Register</h2>
           </Link>

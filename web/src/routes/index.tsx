@@ -1,13 +1,15 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Principal from '../pages/Principal';
+import CreateUser from '../pages/CreateUser';
 
 const Routes = () => {
   return (
-    <BrowserRouter>
+    <Switch>
       <Route component={Principal} path='/' exact/>
-    </BrowserRouter>
+      <Route component={CreateUser} path='/users' />
+    </Switch>
   )
 }
 
