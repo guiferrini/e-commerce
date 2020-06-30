@@ -5,6 +5,8 @@ import { useField } from '@unform/core';
 
 import { Container, Error } from './styles';
 
+import Tooltip from '../Tooltip/index';
+
 // extendendo as propriedades do Input
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string; //sobre escreve 'name'
@@ -36,6 +38,7 @@ useEffect(() => {
 
       {error && 
         <Error>
+          <Tooltip title={error}/>
           <FiAlertCircle size={16} color="#bd0000" />
         </Error>}
     </Container>
