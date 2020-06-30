@@ -1,8 +1,9 @@
 import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 import { IconBaseProps } from 'react-icons' //passa as propriedades base de um icon
+import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
 
-import { Container } from './styles';
+import { Container, Error } from './styles';
 
 // extendendo as propriedades do Input
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -22,10 +23,10 @@ useEffect(() => {
     ref: inputRef.current, // ref da acesso ao input no HTML. O input fica dentro do 'current'
     path: 'value', // onde busca o valor, qual é o caminho a informação dentro do input
   });
-}, [fieldName, registerField]);
+}, [fieldName, registerField]); 
 
   return (
-    <Container>
+    <Container isError={!!error}>
       {Icon && <Icon size={16} />}
       <input 
         defaultValue={defaultValue} 
@@ -33,7 +34,10 @@ useEffect(() => {
         {...rest}
       />
 
-      {error}
+      {error && 
+        <Error>
+          <FiAlertCircle size={16} color="#bd0000" />
+        </Error>}
     </Container>
   );
 };

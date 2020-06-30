@@ -1,7 +1,8 @@
 import React, { useContext, useCallback, useRef } from 'react';
 import { 
   FiFacebook, FiInstagram, FiLinkedin, FiYoutube, 
-  FiAlertCircle, FiFrown, FiMail, FiLock, FiSearch 
+  FiAlertCircle, FiFrown, FiMail, FiKey, FiSearch,
+  FiShoppingCart,  
 } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
@@ -96,8 +97,8 @@ return (
             placeholder="EMAIL"
           />
           <Input 
-            icon={FiLock}
-            type="text"
+            icon={FiKey}
+            type="password"
             name="password"
             id="password"
             placeholder="PASSWORD"
