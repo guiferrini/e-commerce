@@ -18,12 +18,15 @@ export const AuthContext = createContext<AuthContextState>(
 // Propriedade: children - td q o componente receber como filho, 
 // repassamos p algum lugar aqui dentro do context provider
 export const AuthProvider: React.FC = ({ children }) => {
+  
   // MEtodo de Autenticação
   const singIn = useCallback(async({ email, password }) => {
     const response = await api.post('session', {
       email,
       password
     })
+
+    console.log(response.data);
   }, [])
 
   return ( 

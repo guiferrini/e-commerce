@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core'; // tipagem c tds funções do useRef.current
 import * as Yup from 'yup';
-import validationError from '../../erros/validationErros';
 
+import validationError from '../../erros/validationErros';
 import { AuthContext } from '../../context/AuthContext';
 
 import Input from '../../components/Input';
@@ -29,11 +29,11 @@ interface SingInFormData {
 }
 
 const Principal: React.FC = () => {
-  const { singIn } = useContext(AuthContext);
-
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async(data: object) => {
+  const { singIn } = useContext(AuthContext);
+
+  const handleSubmit = useCallback(async(data: SingInFormData) => {
     try {
       formRef.current?.setErrors({}); //zerando erros
       
@@ -48,16 +48,16 @@ const Principal: React.FC = () => {
         abortEarly: false,
       });
 
-      // singIn({
-        //   email: data.email,
-        //   password: data.password,
-        // });
+      singIn({
+          email: data.email,
+          password: data.password,
+        });
     } catch (err) {
       const errors = validationError(err)
 
       formRef.current?.setErrors(errors)
     }
-  }, []); 
+  }, [singIn]); 
 
   //uma função dentro do componente -> usar 'useCallback'
   const handleSubmitSearch = useCallback(() => {}, []);
