@@ -14,6 +14,7 @@ interface SingInCredential {
 interface AuthContextState { // colocar tds infos q quero repassar...
   user: object;
   singIn(credential: SingInCredential): Promise<void>;
+  singOut(): void;
 }
 
 export const AuthContext = createContext<AuthContextState>(
@@ -24,14 +25,14 @@ export const AuthContext = createContext<AuthContextState>(
 // repassamos p algum lugar aqui dentro do context provider
 export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => { // se já tiver registro no localstorage, retorna ele, se não retorna vazio
-    const user = localStorage.getItem('@e-commerce:user'); //transformando em objeto d novo
-    const token = localStorage.getItem('@e-commerce:token');
+  const user = localStorage.getItem('@e-commerce:user'); 
+  const token = localStorage.getItem('@e-commerce:token');
 
-    if(user && token) {
-      return { token, user: JSON.parse(user) };
-    }
-  
-    return {} as AuthState
+  if(user && token) {
+    return { token, user: JSON.parse(user) }; //transformando em objeto d novo
+  }
+
+  return {} as AuthState
   }); 
 
   // MEtodo de Autenticação
@@ -50,8 +51,15 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, [])
 
+  const singOut = useCallback(() => {
+    localStorage.removeItem('@e-commerce:user'); 
+    localStorage.removeItem('@e-commerce:token');
+
+    setData({} as AuthState);
+  }, []);
+
   return ( 
-    <AuthContext.Provider value={{ user: data.user, singIn }}>
+    <AuthContext.Provider value={{ user: data.user, singIn, singOut }}>
       {children}
     </AuthContext.Provider>
   );
