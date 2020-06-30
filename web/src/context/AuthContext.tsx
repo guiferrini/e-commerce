@@ -1,5 +1,10 @@
-import React, { createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
 import api from '../services/api';
+
+interface AuthState{
+  token: string;
+  user: object;
+}
 
 interface SingInCredential {
   email: string;
@@ -7,7 +12,7 @@ interface SingInCredential {
 }
 
 interface AuthContextState { // colocar tds infos q quero repassar...
-  name: string;
+  user: object;
   singIn(credential: SingInCredential): Promise<void>;
 }
 
@@ -18,7 +23,17 @@ export const AuthContext = createContext<AuthContextState>(
 // Propriedade: children - td q o componente receber como filho, 
 // repassamos p algum lugar aqui dentro do context provider
 export const AuthProvider: React.FC = ({ children }) => {
+  const [data, setData] = useState<AuthState>(() => { // se já tiver registro no localstorage, retorna ele, se não retorna vazio
+    const user = localStorage.getItem('@e-commerce:user'); //transformando em objeto d novo
+    const token = localStorage.getItem('@e-commerce:token');
+
+    if(user && token) {
+      return { token, user: JSON.parse(user) };
+    }
   
+    return {} as AuthState
+  }); 
+
   // MEtodo de Autenticação
   const singIn = useCallback(async({ email, password }) => {
     const response = await api.post('session', {
@@ -26,11 +41,17 @@ export const AuthProvider: React.FC = ({ children }) => {
       password
     })
 
-    console.log(response.data);
+    // console.log(response.data.user[0].name);
+    const { user, token } = response.data;
+
+    localStorage.setItem('@e-commerce:user', JSON.stringify(user)); // uma string contendo um JSON
+    localStorage.setItem('@e-commerce:token', token);
+
+    setData({ token, user });
   }, [])
 
   return ( 
-    <AuthContext.Provider value={{ name: 'guilherme', singIn }}>
+    <AuthContext.Provider value={{ user: data.user, singIn }}>
       {children}
     </AuthContext.Provider>
   );
