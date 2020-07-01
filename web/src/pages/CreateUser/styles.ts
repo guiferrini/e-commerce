@@ -9,27 +9,37 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin: 0 20px 15px 20px; */
   width: 100vw;
   background: #F0F0F5;
 
+  main {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+  }
   main h1{
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
+    margin-top: 20px;
   }
 
   main Form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between
+    justify-content: space-between;
   }
 
   main Form div {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    justify-content: center;
+    margin-right: 5px;
+    /* margin-bottom: 20px; */
     padding: 10px;
+  }
+
+  main Form fieldset {
+    margin-bottom: 10px;
   }
 
   main Form Button {

@@ -33,7 +33,6 @@ const Principal: React.FC = () => {
   const history = useHistory();
 
   const { user, singIn } = useContext(AuthContext);
-  console.log(user);   
 
   const handleSubmit = useCallback(async(data: SingInFormData) => {
     try {
@@ -167,7 +166,7 @@ return (
         </section>
         <hgroup>
         {/* busca cliente digita / filtro - com foto */}
-        {/* <Form initialData={{ search: 'Malbec'}}> */}
+        {/* <Form <Input defaultValue={{ search: 'Malbec'}}> */}
           <Form onSubmit={handleSubmitSearch}>
             <Input 
               icon={FiSearch}

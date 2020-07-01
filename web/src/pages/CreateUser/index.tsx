@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { 
   FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiLogIn, 
   FiMail, FiCalendar, FiKey, FiMessageCircle, FiUser,
@@ -14,24 +14,69 @@ import { AuthContext } from '../../context/AuthContext';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import api from '../../services/api'; 
+
+import logo from '../../assets/Logo_Bodega_Ferrini.png';
 
 import { Container, Content } from './styles';
 
-import logo from '../../assets/Logo_Bodega_Ferrini.png';
-import argentina from '../../assets/wine_of_Argentina.jpg';
-import prices from '../../assets/special_prices.jpg';
-import week from '../../assets/wine_of_week.jpg';
+interface CreteUserData {
+  name: string;
+  email: string;
+  password: string;
+  whatsapp: number,
+  date: Date;
+  street: string;
+  number: number;
+  complement: string;
+  uf: string;
+  city: string;
+}
 
 const CreateUser: React.FC = () => {
+  const formRef = useRef<FormHandles>(null)
+  const history = useHistory();
 
-  const handleSubmitCreate = useCallback(() => {
-    console.log('vai');
-  }, []);
+  const handleSubmitCreate = useCallback(async (data: CreteUserData) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Minimum 3 characters'),
+        email: Yup.string()
+          .required('Email required')
+          .email('Enter a valid email address'),
+        password: Yup.string().required('minimum 6 digits'),
+        whatsapp: Yup.number().required('Only numbers'),
+        date: Yup.date().required('Select the date of birth'),
+        street: Yup.string().required('Street required'),
+        number: Yup.number().required('Only numbers'),
+        complement: Yup.string().required('Complement required'),
+        uf: Yup.string().required('UF required'),
+        city: Yup.string().required('City required'),
+      })
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      await api.post('/users', data);
+
+      alert('Account successfully created :), Now, you can do you Login!');
+      history.push('/')
+
+    } catch (err) {
+      console.log('erro')
+      const errors = validationError(err)
+
+      formRef.current?.setErrors(errors)
+    }
+  }, [history]);
 
   return (
     <Container>
       <Content>
-      <header>
+        <header>
           <hgroup>
             <a href='https://www.instagram.com/guiferrini/?hl=pt-br' target='_blank'>
               <span><FiInstagram /></span>
@@ -61,93 +106,93 @@ const CreateUser: React.FC = () => {
         </header>
 
         <main>
-          <h1>Welcome to the Register</h1>
           <Form onSubmit={handleSubmitCreate}>
+            <h1>Welcome to the Register</h1>
             <fieldset>
-            <div>
-              <Input 
-                icon={FiUser}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="NAME"
-              />
-              <Input 
-                icon={FiMail}
-                type="email"
-                name="email"
-                id="email"
-                placeholder="EMAIL"
-              />
-            </div>
-            <div>
-              <Input 
-                icon={FiKey}
-                type="text"
-                name="password"
-                id="password"
-                placeholder="PASSWORD"
-              />
-            </div>
-            <div>
-              <Input 
-                icon={FiMessageCircle}
-                type="number"
-                name="whatsapp"
-                id="whatsapp"
-                placeholder="WHATSAPP"
-              />
-              <Input 
-                icon={FiCalendar}
-                type="Date"
-                name="date"
-                id="date"
-                placeholder="Date"
-              />
-            </div>
+              <legend>Your Account</legend>
+              <div>
+                <Input 
+                  icon={FiUser}
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="NAME"
+                />
+                <Input 
+                  icon={FiMail}
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="EMAIL"
+                />
+                <Input 
+                  icon={FiKey}
+                  type="text"
+                  name="password"
+                  id="password"
+                  placeholder="PASSWORD"
+                />
+              </div>
             </fieldset>
             <fieldset>
-            <div>
-              <Input 
-                icon={FiHome}
-                type="text"
-                name="street"
-                id="street"
-                placeholder="STREET"
-              />
-              <Input 
-                icon={FiTarget}
-                type="number"
-                name="number"
-                id="number"
-                placeholder="NUMBER"
-              />
-            </div>
-            <div>
-              <Input 
-                icon={FiPlusCircle}
-                type="text"
-                name="complement"
-                id="complement"
-                placeholder="COMPLEMENT"
-              />
-            </div>
-            <div>
-              <Input 
-                icon={FiTag}
-                type="text"
-                name="uf"
-                id="uf"
-                placeholder="UF"
-              />
-              <Input 
-                icon={FiTag}
-                type="text"
-                name="city"
-                id="city"
-                placeholder="CITY"
-              />
-            </div>
+              <legend>Your Information</legend>
+              <div>
+                <Input 
+                  icon={FiMessageCircle}
+                  type="number"
+                  name="whatsapp"
+                  id="whatsapp"
+                  placeholder="WHATSAPP"
+                />
+                <Input 
+                  icon={FiCalendar}
+                  type="Date"
+                  name="date"
+                  id="date"
+                  placeholder="Date"
+                />
+              </div>
+              <div>
+                <Input 
+                  icon={FiHome}
+                  type="text"
+                  name="street"
+                  id="street"
+                  placeholder="STREET"
+                />
+                <Input 
+                  icon={FiTarget}
+                  type="number"
+                  name="number"
+                  id="number"
+                  placeholder="NUMBER"
+                />
+              </div>
+              <div>
+                <Input 
+                  icon={FiPlusCircle}
+                  type="text"
+                  name="complement"
+                  id="complement"
+                  placeholder="COMPLEMENT"
+                />
+              </div>
+              <div>
+                <Input 
+                  icon={FiTag}
+                  type="text"
+                  name="uf"
+                  id="uf"
+                  placeholder="UF"
+                />
+                <Input 
+                  icon={FiTag}
+                  type="text"
+                  name="city"
+                  id="city"
+                  placeholder="CITY"
+                />
+              </div>
             </fieldset>
             <Button type="submit">
               Submit
@@ -183,7 +228,6 @@ const CreateUser: React.FC = () => {
             </a>
           </hgroup>
         </footer>
-
       </Content>
     </Container>
   );
