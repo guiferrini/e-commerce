@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useCallback, useContext } from 'react';
 import { 
   FiFacebook, FiInstagram, FiLinkedin, FiYoutube, 
   FiAlertCircle, FiFrown, FiFileText, FiSearch,
@@ -24,8 +23,23 @@ import prices from '../../assets/special_prices.jpg';
 import week from '../../assets/wine_of_week.jpg';
 
 const UserPage: React.FC = () => {
+  const { singOut } = useContext(AuthContext);
+  const history = useHistory();
 
-  const handleSubmit = () => {};
+  const handleSubmit = useCallback(async(data: object) => {
+    const check = window.confirm("Do you want to leave?");
+
+    if(check == true) {
+      try {
+        alert('Thanks, come back soon.')
+        singOut()
+        history.push('/');
+      } catch (err) {
+        alert('ERROR. Please try again.')
+      }
+    }
+    
+  }, [history, singOut]);
 
   return (
     <Container>

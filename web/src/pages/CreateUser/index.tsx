@@ -59,6 +59,8 @@ const CreateUser: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
+
+      // fazer validação do e-mail!
       
       await api.post('/users', data);
 
