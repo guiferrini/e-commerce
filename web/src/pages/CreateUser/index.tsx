@@ -47,26 +47,25 @@ const CreateUser: React.FC = () => {
           .required('Email required')
           .email('Enter a valid email address'),
         password: Yup.string().required('minimum 6 digits'),
-        whatsapp: Yup.number().required('Only numbers'),
-        date: Yup.date().required('Select the date of birth'),
+        whatsapp: Yup.string().required('Only numbers'),
+        date: Yup.string().required('Select the date of birth'),
         street: Yup.string().required('Street required'),
-        number: Yup.number().required('Only numbers'),
+        number: Yup.string().required('Only numbers'),
         complement: Yup.string().required('Complement required'),
         uf: Yup.string().required('UF required'),
         city: Yup.string().required('City required'),
       })
-
+      
       await schema.validate(data, {
         abortEarly: false,
       });
-
+      
       await api.post('/users', data);
 
       alert('Account successfully created :), Now, you can do you Login!');
       history.push('/')
 
     } catch (err) {
-      console.log('erro')
       const errors = validationError(err)
 
       formRef.current?.setErrors(errors)
@@ -106,7 +105,7 @@ const CreateUser: React.FC = () => {
         </header>
 
         <main>
-          <Form onSubmit={handleSubmitCreate}>
+          <Form ref={formRef} onSubmit={handleSubmitCreate}>
             <h1>Welcome to the Register</h1>
             <fieldset>
               <legend>Your Account</legend>
@@ -149,7 +148,7 @@ const CreateUser: React.FC = () => {
                   type="Date"
                   name="date"
                   id="date"
-                  placeholder="Date"
+                  placeholder="DATE DD/MM/YYYY"
                 />
               </div>
               <div>
