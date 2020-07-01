@@ -63,7 +63,7 @@ const Principal: React.FC = () => {
       formRef.current?.setErrors(errors)
     }
 
-  }, [singIn]); 
+  }, [singIn, history]); 
 
   //uma função dentro do componente -> usar 'useCallback'
   const handleSubmitSearch = useCallback(() => {}, []);

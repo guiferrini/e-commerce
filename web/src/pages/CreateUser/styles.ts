@@ -96,34 +96,27 @@ export const Content = styled.div`
       padding: 10px;
       width: 30%;
     }
-
-    /* form {
+    
+    > a {
       display: flex;
-      flex-direction: column;
-      margin-right: 5px;
-      padding: 15px; */
+      align-self: center;
+      align-items: center;
+      border-radius: 8px;
+      padding: 5px;
+      height: 30px;
+      width: 300px;
+      border: 2px solid black;
+      transition: background-color 0.2s;
 
-      > a {
-        display: flex;
-        align-self: center;
-        align-items: center;
-        border-radius: 8px;
-        padding: 5px;
-        height: 30px;
-        width: 300px;
-        border: 2px solid black;
-        transition: background-color 0.2s;
-  
-        &:hover {
-          background: #8c313d;
-          color: #F0F0F5;
-          font-weight: bold;
-          border: 2px solid #8c313d;
-        } 
-        h2 {
-          margin-left: 10px;
-          font-size: 15px;
-        }
+      &:hover {
+        background: #8c313d;
+        color: #F0F0F5;
+        font-weight: bold;
+        border: 2px solid #8c313d;
+      } 
+      h2 {
+        margin-left: 10px;
+        font-size: 15px;
       }
     }
   }
