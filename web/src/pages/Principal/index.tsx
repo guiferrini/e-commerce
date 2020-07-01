@@ -66,7 +66,9 @@ const Principal: React.FC = () => {
   }, [singIn, history]); 
 
   //uma função dentro do componente -> usar 'useCallback'
-  const handleSubmitSearch = useCallback(() => {}, []);
+  const handleSubmitSearch = useCallback(() => {
+    console.log('vai')
+  }, []);
 
 return (
   <Container> 

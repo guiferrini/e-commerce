@@ -1,8 +1,8 @@
-import React from 'react';
-
+import React, { useCallback } from 'react';
 import { 
-  FiFacebook, FiInstagram, FiLinkedin, FiYoutube, 
-  FiLogIn  
+  FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiLogIn, 
+  FiMail, FiCalendar, FiKey, FiMessageCircle, FiUser,
+  FiHome, FiPlusCircle, FiTarget, FiTag  
 } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
@@ -23,6 +23,11 @@ import prices from '../../assets/special_prices.jpg';
 import week from '../../assets/wine_of_week.jpg';
 
 const CreateUser: React.FC = () => {
+
+  const handleSubmitCreate = useCallback(() => {
+    console.log('vai');
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -56,7 +61,98 @@ const CreateUser: React.FC = () => {
         </header>
 
         <main>
-          <h1>main</h1>
+          <h1>Welcome to the Register</h1>
+          <Form onSubmit={handleSubmitCreate}>
+            <fieldset>
+            <div>
+              <Input 
+                icon={FiUser}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="NAME"
+              />
+              <Input 
+                icon={FiMail}
+                type="email"
+                name="email"
+                id="email"
+                placeholder="EMAIL"
+              />
+            </div>
+            <div>
+              <Input 
+                icon={FiKey}
+                type="text"
+                name="password"
+                id="password"
+                placeholder="PASSWORD"
+              />
+            </div>
+            <div>
+              <Input 
+                icon={FiMessageCircle}
+                type="number"
+                name="whatsapp"
+                id="whatsapp"
+                placeholder="WHATSAPP"
+              />
+              <Input 
+                icon={FiCalendar}
+                type="Date"
+                name="date"
+                id="date"
+                placeholder="Date"
+              />
+            </div>
+            </fieldset>
+            <fieldset>
+            <div>
+              <Input 
+                icon={FiHome}
+                type="text"
+                name="street"
+                id="street"
+                placeholder="STREET"
+              />
+              <Input 
+                icon={FiTarget}
+                type="number"
+                name="number"
+                id="number"
+                placeholder="NUMBER"
+              />
+            </div>
+            <div>
+              <Input 
+                icon={FiPlusCircle}
+                type="text"
+                name="complement"
+                id="complement"
+                placeholder="COMPLEMENT"
+              />
+            </div>
+            <div>
+              <Input 
+                icon={FiTag}
+                type="text"
+                name="uf"
+                id="uf"
+                placeholder="UF"
+              />
+              <Input 
+                icon={FiTag}
+                type="text"
+                name="city"
+                id="city"
+                placeholder="CITY"
+              />
+            </div>
+            </fieldset>
+            <Button type="submit">
+              Submit
+            </Button>
+          </Form>
         </main>
 
         <footer>
